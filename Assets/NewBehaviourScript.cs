@@ -26,7 +26,7 @@ public class NewBehaviourScript : MonoBehaviour
         var result = await pexelsClient.SearchPhotosAsync("nature");
         foreach (var photo in result.photos)
         {
-            Debug.Log(photo.source.large);
+        
             StartCoroutine(SaveImg(photo.source.original, "C:/Users/Gkoala/Desktop/" + photo.photographerId+".jpg"));
         }
     }
