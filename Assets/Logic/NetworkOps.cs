@@ -12,5 +12,7 @@ namespace DesktopWallpaper.Logic
         {
             pexelsClient = new PexelsClient("563492ad6f91700001000001abee145ae98747cd8160adfdbcde89a3");
         }
+
+      
     }
 }

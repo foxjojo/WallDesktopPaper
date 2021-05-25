@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class Config
 {
-    public static string TempSavePath
-    {
-        get;
-        private set; }
+    public static string TempSavePath { get; private set; }
 
     private string DefaultTempSavePath()
     {
@@ -17,5 +14,17 @@ public class Config
         }
 
         return TempSavePath;
+    }
+
+    public enum ImageQuality
+    {
+        original,
+        large2x,
+        large,
+        medium,
+        small,
+        portrait,
+        landscape,
+        tiny,
     }
 }
