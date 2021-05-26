@@ -13,7 +13,7 @@ public class MainView : MonoBehaviour
     private int nowCuratedPage = 1;
 
     public GameObject tempCell;
-
+    public GameObject detailPanel;
     public List<GameObject> cellPool;
 
     // Start is called before the first frame update
@@ -27,8 +27,7 @@ public class MainView : MonoBehaviour
     /// </summary>
     async private void GetCuratedPhotos()
     {
-        var result = await NetworkOps.pexelsClient.CuratedPhotosAsync(nowCuratedPage);
-
+        var result = await NetworkOps.pexelsClient.CuratedPhotosAsync(nowCuratedPage,100);
         foreach (var photo in result.photos)
         {
             StartCoroutine(SaveImg(photo));
@@ -58,8 +57,13 @@ public class MainView : MonoBehaviour
     private void CreateWallpaperCell(Texture tex, Photo photo)
     {
         var t = Instantiate(tempCell, tempCell.transform.parent, true);
-        t.GetComponent<WallpaperCell>().Init(tex, photo);
+        t.GetComponent<WallpaperCell>().Init(tex, photo, () => { OpenDetail(photo, tex); });
         AdaptiveVertical.Instance.AddChild(t.GetComponent<RectTransform>());
         t.SetActive(true);
+    }
+
+    private void OpenDetail(Photo data,Texture tex)
+    {
+        detailPanel.GetComponent<DetailsView>().Init(tex,data);
     }
 }
